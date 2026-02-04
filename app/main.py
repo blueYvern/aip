@@ -1,4 +1,4 @@
-from aipdemo.routers import health
+from app.routers import health
 from fastapi import FastAPI
 
 
