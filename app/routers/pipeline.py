@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.db import SessionLocal
 from app.models import Pipeline
+from app.schemas import PipelineResponse
 
 
 router = APIRouter(prefix="/pipelines", tags=["pipelines"])
@@ -15,7 +16,7 @@ def get_db():
         db.close()
 
 
-@router.post("/")
+@router.post("/", response_model=PipelineResponse)
 def create_pipeline(name: str, status: str, db: Session = Depends(get_db)):
     pipeline = Pipeline(name=name, status=status)
     db.add(pipeline)
@@ -24,6 +25,6 @@ def create_pipeline(name: str, status: str, db: Session = Depends(get_db)):
     return pipeline
 
 
-@router.get("/")
+@router.get("/", response_model=list[PipelineResponse])
 def get_list_pipelines(db: Session = Depends(get_db)):
     return db.query(Pipeline).all()
