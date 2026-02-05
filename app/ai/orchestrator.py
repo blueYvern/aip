@@ -23,8 +23,8 @@ class AiOrchestrator:
     def analyze(self, question: str):
         context = self.build_context()
 
-        prompt = f""" 
-        You are an AI agent analysing given json dumps. 
+        prompt = f"""
+        You are an AI agent analysing given json dumps.
 
         Context:
         {json.dumps(context, indent=2)}

@@ -10,7 +10,7 @@ class PipelineContextProvider(ContextProvider):
         self.limit = limit
 
     def get_context(self):
-        db = SessionLocal()      
+        db = SessionLocal()
         try:
             pipelines = (
                 db.query(Pipeline)
@@ -30,5 +30,3 @@ class PipelineContextProvider(ContextProvider):
             }
         finally:
             db.close()
-            
-
